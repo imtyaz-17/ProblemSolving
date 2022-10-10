@@ -1,0 +1,30 @@
+//Given that the game could go on infinitely, the probability is an infinite series. For the first player, it is:
+//p + p*(1-p)^n + p*(1-p)^2n + ...
+//That is, the chance of the first player winning is the chance that he gets the event on his first try, plus the chance that he gets it on his second try (after n people have failed, him included), plus the chance that he gets it on his third try, ad infinitum.
+//In general, for player I (1-indexed) the probability is:
+//p*(1-p)^(k-1) + p*(1-p)^(n+k-1) + p*(1-p)^(2n+k-1) ...
+
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+    int s;
+    cin>>s;
+    while(s--){
+        int n,I;
+        double p;
+        cin>>n>>p>>I;
+        if (p == 0.0) {
+            printf("0.0000\n");
+            continue;
+        }
+        if (I == 1)
+            printf("%.4lf\n", (p / (1 - pow(1-p, n))));
+        else
+            printf("%.4lf\n", (p*pow(1-p,I-1))/(1-pow(1-p,n)));
+    }
+
+    return 0;
+}
+
