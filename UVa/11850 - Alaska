@@ -1,0 +1,37 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+
+int stations,i;
+
+while(cin>>stations && stations){
+
+bool imty=true;
+int positions[stations+2];
+
+positions[0]=0;
+positions[stations+1]=1422;
+
+for(i=1;i<=stations;i++)
+    cin>>positions[i];
+
+stations+=2;
+sort(positions, positions+stations);
+
+
+for(i=1;i<stations;i++){
+    if(positions[i]- positions[i-1]>200){
+        imty=false;
+        break;
+    }
+}
+if(positions[stations-1]-positions[stations-2]>100)
+    imty=false;
+if(imty)
+    printf("POSSIBLE\n");
+else
+    printf("IMPOSSIBLE\n");
+}
+return 0;
+}
