@@ -1,0 +1,38 @@
+
+#include <stdio.h>
+#include <string.h>
+#define N 1000
+int pos[N];
+char arr[N][N];
+int main()
+{
+  int n;
+  int i;
+  int tmp;
+  int cnt;
+  bool state = true;
+  scanf("%d\n", &n);
+
+  while (n--)
+  {
+      if (!state)  printf("\n");
+      state = false;
+
+      cnt = 0;
+
+      while (true)
+      {
+          scanf("%d", &tmp);
+          pos[tmp-1] = cnt++;
+
+          if (getchar() == '\n')
+              break;
+      }
+
+      for ( i = 0; i < cnt; i++)
+          scanf("%s", arr[i]);
+
+      for ( i = 0; i < cnt; i++)
+          printf("%s\n", arr[pos[i]]);
+  }
+}
