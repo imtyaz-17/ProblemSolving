@@ -1,0 +1,22 @@
+#include<iostream>
+using namespace std;
+
+int main()
+{
+       int coin[5]={1,5,10,25,50},ways[7500]={0};
+       int i,j,n;
+        ways[0]=1;
+        for(i=0;i<5;i++)
+        {
+          for(j=coin[i];j<=7500;j++)
+          {
+                ways[j]+=ways[j-coin[i]];  // using dynamic approach
+                
+          }
+        }
+        while(cin>>n)
+        {
+           printf("%d\n",ways[n]);
+        }
+    return 0;
+}
