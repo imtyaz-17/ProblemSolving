@@ -1,0 +1,68 @@
+#include <iostream>
+#include <cstring>
+
+using namespace std;
+
+bool found;
+int nodes, length;
+int matrx[10][10];
+bool init[10];
+int arr[10];
+
+void graph_length(int n, int l)
+{
+    if (l > length)
+    {
+        found = true;
+        printf("(");
+        for (int i = 0; i < length; i++)
+        {
+            printf("%d,", arr[i]);
+        }
+        printf("%d)\n", arr[length]);
+        return;
+    }
+
+    for (int i = 1; i <= nodes; i++)
+    {
+        if (matrx[n][i] && init[i] == false)
+        {
+            arr[l] = i;
+            init[i] = true;
+            graph_length(i, l + 1);
+            init[i] = false;
+        }
+    }
+}
+
+int main()
+{
+
+    while (scanf("%d", &nodes))
+    {
+
+        if (nodes == -9999)
+            continue;
+        scanf("%d", &length);
+
+            for (int i = 1; i <= nodes; i++)
+        {
+            for (int j = 1; j <= nodes; j++)
+            {
+                scanf("%d", &matrx[i][j]);
+            }
+        }
+
+        memset(init, false, sizeof(init));
+        found = false;
+        arr[0] = 1;
+        init[1] = true;
+        graph_length(1, 1);
+        init[1] = false;
+
+        if (!found)
+            printf("no walk of length %d\n", length);
+    }
+
+    return 0;
+}
