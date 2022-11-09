@@ -1,0 +1,46 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+
+    int n,s;
+
+    while (scanf("%d %d", &n,&s) != EOF)
+    {
+        int arr[n];
+        for (int i = 0; i < n; i++)
+        {
+            cin>> arr[i];
+        }
+        
+        int low =0, high =0, ans= n+1;
+        int sum =arr[0];
+
+        while (high<n)
+        {
+            if(sum>=s){
+                int temp = high - low +1;
+                if(temp<ans) ans =temp;
+            }
+
+            if(sum>= s && low <high){
+                sum-=arr[low];
+                low++;
+            }
+            else if( sum< s){
+                high++;
+                if(high < n){
+                    sum+=arr[high];
+                }
+            }
+        }
+
+        if(ans == n+1) ans =0;
+
+        cout << ans << endl;
+        
+    }
+    
+    return 0;
+}
