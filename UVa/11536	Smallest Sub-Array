@@ -1,0 +1,52 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+    int t, cases = 0;
+    cin >> t;
+
+    while (t--)
+    {
+        cases++;
+        int n, m, k;
+        cin >> n >> m >> k;
+
+        int X[n+1];
+        X[1] = 1;
+        X[2] = 2;
+        X[3] = 3;
+        for (int j = 4; j <= n; j++)
+            X[j] = (X[j - 1] + X[j - 2] + X[j - 3]) % m + 1;
+
+        int ans = n+1;
+        int low =1,cont=0;
+        int check[n+1] ={0};
+        for (int  high = 1; high <= n; high++)
+        {
+           int temp =X[high];
+           check[temp]++;
+
+           if(temp<=k && check[temp]==1) cont++;
+
+           while (low<= high && cont==k )
+           {
+                ans = min(ans, high - low+1);
+                int p = X[low++];
+                check[p]--;
+                if(p<= k && check[p] == 0){
+                    cont --;
+                }
+           }  
+        }
+
+
+        printf("Case %d: ", cases);
+
+        if(ans<=n) printf("%d\n",ans);
+		else printf("sequence nai\n");
+    }
+
+    return 0;
+}
